@@ -6,8 +6,11 @@ ARG group=jenkins
 ARG uid=1000
 ARG gid=1000
 
+ARG DEBIAN_FRONTEND=noninteractive
+ENV TZ=Europa/Oslo
+
 RUN apt-get update \
- && apt-get install -qy --no-install-recommends openssh-server openjdk-11-jdk subversion git \
+ && apt-get install -qy --no-install-recommends openssh-server openjdk-21-jdk subversion git \
  && rm -rf /var/lib/apt/lists/* \
  && sed -i 's|session    required     pam_loginuid.so|session    optional     pam_loginuid.so|g' /etc/pam.d/sshd \
  && mkdir -p /var/run/sshd \
